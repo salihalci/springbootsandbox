@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -20,13 +22,41 @@ public class CruddemoApplication {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 
         return runner -> {
-           // createStudent(studentDAO);
+            // createStudent(studentDAO);
 
-           // retrieveStudent(studentDAO);
+            // retrieveStudent(studentDAO);
 
-            retrieveAllStudents(studentDAO);
+            // retrieveAllStudents(studentDAO);
+
+            // retrieveStudentByLastName(studentDAO);
+            updateStudent(studentDAO);
         };
 
+    }
+
+    private void updateStudent(StudentDAO studentDAO) {
+        //find object based on id
+        System.out.println("Find student by id executed");
+        Student tempStudent = studentDAO.findById(1);
+        System.out.println("Object is:"+tempStudent);
+        //set new field ex change name
+
+        tempStudent.setEmail("test@yahoo.com");
+        System.out.println("Updated object is :"+tempStudent);
+        //update object
+
+        studentDAO.updateStudent(tempStudent);
+        System.out.println("Update completed.");
+    }
+
+    private void retrieveStudentByLastName(StudentDAO studentDAO) {
+
+        List<Student> lastNamedList = studentDAO.findByLastName("Alcı");
+
+        for (Student student : lastNamedList) {
+            System.out.println(student);
+
+        }
     }
 
     private void createStudent(StudentDAO studentDAO) {
@@ -62,15 +92,25 @@ public class CruddemoApplication {
 
         Student retStudent = studentDAO.findById(theStudent.getId());
 
-        System.out.println("Retrieved Student details are:" +retStudent.toString());
+        System.out.println("Retrieved Student details are:" + retStudent.toString());
 
 
     }
 
 
-    private void retrieveAllStudents(StudentDAO studentDAO){
+    private void retrieveAllStudents(StudentDAO studentDAO) {
         System.out.println("Retrieve all students started....");
-        System.out.println(studentDAO.findAll().toString());
+
+        //Get students
+        List<Student> studentList = studentDAO.findAll();
+
+
+        //Show students
+        for (Student tempStudent : studentList) {
+            System.out.println(tempStudent);
+
+        }
+        // System.out.println(studentDAO.findAll().toString());
         System.out.println("Retrieve all students ended....");
 
 
