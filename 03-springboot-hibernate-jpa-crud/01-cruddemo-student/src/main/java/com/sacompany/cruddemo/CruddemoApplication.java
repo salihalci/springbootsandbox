@@ -29,20 +29,30 @@ public class CruddemoApplication {
             // retrieveAllStudents(studentDAO);
 
             // retrieveStudentByLastName(studentDAO);
-            updateStudent(studentDAO);
+            // updateStudent(studentDAO);
+
+            updateAll(studentDAO);
         };
 
+    }
+
+    private void updateAll(StudentDAO studentDAO) {
+
+        // update all records
+
+        int row = studentDAO.updateAllStudents("updatedemail@test.com");
+        System.out.println("Updated row count :"+row);
     }
 
     private void updateStudent(StudentDAO studentDAO) {
         //find object based on id
         System.out.println("Find student by id executed");
         Student tempStudent = studentDAO.findById(1);
-        System.out.println("Object is:"+tempStudent);
+        System.out.println("Object is:" + tempStudent);
         //set new field ex change name
 
         tempStudent.setEmail("test@yahoo.com");
-        System.out.println("Updated object is :"+tempStudent);
+        System.out.println("Updated object is :" + tempStudent);
         //update object
 
         studentDAO.updateStudent(tempStudent);

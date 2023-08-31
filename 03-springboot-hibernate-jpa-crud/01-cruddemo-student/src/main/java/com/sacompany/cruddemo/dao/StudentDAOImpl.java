@@ -2,6 +2,7 @@ package com.sacompany.cruddemo.dao;
 
 import com.sacompany.cruddemo.entitiy.Student;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class StudentDAOImpl implements StudentDAO{
+public class StudentDAOImpl implements StudentDAO {
 
     private EntityManager entityManager;
 
@@ -28,24 +29,24 @@ public class StudentDAOImpl implements StudentDAO{
 
     @Override
     public Student findById(Integer id) {
-        return entityManager.find(Student.class,id);
+        return entityManager.find(Student.class, id);
     }
 
     @Override
     public List<Student> findAll() {
 
-        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student order by firstName DESC",Student.class);
+        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student order by firstName DESC", Student.class);
         return theQuery.getResultList();
     }
 
     @Override
     public List<Student> findByLastName(String lastName) {
         //create query
-        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student where lastName=: theData",Student.class);
+        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student where lastName=: theData", Student.class);
 
 
         //Set query parameters
-        theQuery.setParameter("theData",lastName);
+        theQuery.setParameter("theData", lastName);
         //execute and return list
         return theQuery.getResultList();
 
@@ -58,5 +59,14 @@ public class StudentDAOImpl implements StudentDAO{
 
         entityManager.merge(theStudent);
 
+    }
+
+    @Override
+    @Transactional
+    public int updateAllStudents(String email) {
+        Query query = entityManager.createQuery("UPDATE Student SET email='salihalci@gmail.com'");
+        int rowNums = 0;
+        rowNums = query.executeUpdate();
+        return rowNums;
     }
 }

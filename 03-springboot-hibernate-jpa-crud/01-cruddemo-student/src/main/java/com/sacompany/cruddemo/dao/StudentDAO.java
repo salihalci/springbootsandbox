@@ -15,4 +15,7 @@ public interface StudentDAO {
 
 
     void updateStudent(Student theStudent);
+    int updateAllStudents(String email);
+
+
 }
