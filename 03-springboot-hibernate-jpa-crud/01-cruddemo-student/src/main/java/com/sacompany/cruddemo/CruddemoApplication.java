@@ -33,7 +33,9 @@ public class CruddemoApplication {
 
             //updateAll(studentDAO);
             //deleteStudent(studentDAO);
-            deleteStudentByLastName(studentDAO);
+           // deleteStudentByLastName(studentDAO);
+
+            deleteAllStudents(studentDAO);
         };
 
     }
@@ -140,5 +142,12 @@ public class CruddemoApplication {
        int result= studentDAO.deleteStudentByLasName("Şen");
 
         System.out.println("Deleted row count is:"+result);
+    }
+    private void deleteAllStudents(StudentDAO studentDAO){
+        System.out.println("Delete all students started...");
+        int result = studentDAO.deleteAllStudents();
+
+        System.out.println("Deleted record count is:"+result);
+
     }
 }

@@ -20,5 +20,7 @@ public interface StudentDAO {
     void deleteStudent(Integer id);
     int deleteStudentByLasName(String lastName);
 
+    int deleteAllStudents();
+
 
 }
