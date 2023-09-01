@@ -22,7 +22,7 @@ public class CruddemoApplication {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 
         return runner -> {
-            // createStudent(studentDAO);
+            createStudent(studentDAO);
 
             // retrieveStudent(studentDAO);
 
@@ -35,7 +35,7 @@ public class CruddemoApplication {
             //deleteStudent(studentDAO);
            // deleteStudentByLastName(studentDAO);
 
-            deleteAllStudents(studentDAO);
+          //  deleteAllStudents(studentDAO);
         };
 
     }
@@ -77,11 +77,15 @@ public class CruddemoApplication {
 
         //create student
         System.out.println("Creating student object...");
-        Student theStudent = new Student("Sema", "Alcı", "alcisem@gmail.com");
+        Student theStudent = new Student("John", "Doe", "john@gmail.com");
+        Student theStudent1 = new Student("Nick", "Bo", "nickbo@gmail.com");
+        Student theStudent2 = new Student("Paul", "Go", "paul@gmail.com");
 
         //save student
         System.out.println("Saving the student...");
         studentDAO.save(theStudent);
+        studentDAO.save(theStudent1);
+        studentDAO.save(theStudent2);
         //show studentid
 
         System.out.println("Saved student. Generated id: " + theStudent.getId());
